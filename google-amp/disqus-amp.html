@@ -52,7 +52,8 @@
         window.addEventListener('message', receiveMessage, false);
 
         function receiveMessage(event) {
-            console.log('message received ' + event);
+            console.log('message received ');
+            console.log(event);
             if (event.data) {
                 var msg;
                 try {
@@ -67,7 +68,8 @@
                         height = msg.data.height;
                     }
                     post_message.height = height;
-                    console.log('receiveMessage height updated - ' + post_message);
+                    console.log('receiveMessage height updated');
+                    console.log(post_message);
                     postHeight();
                 }
             }
@@ -97,8 +99,10 @@
                     height = e.height;
                 }
                 post_message.height = height;
-                console.log('disqus onReady height updated - ' + post_message);
-                console.log('disqus onReady event - ' + e);
+                console.log('disqus onReady height updated');
+                console.log(post_message);
+                console.log('disqus onReady event');
+                console.log(e);
                 postHeight();
             });
         };
