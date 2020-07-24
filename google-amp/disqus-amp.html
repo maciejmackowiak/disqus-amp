@@ -40,7 +40,7 @@
         var post_message = {
             sentinel: 'amp',
             type: 'embed-size',
-            height: 300
+            height: 340
         };
 
         function postHeight() {
@@ -53,8 +53,10 @@
             window.parent.postMessage(post_message, '*');
         }
         postHeight();
-        
-        window.addEventListener("resize", postHeight);
+
+
+        window.addEventListener('message', postHeight);
+        window.addEventListener('resize', postHeight);
 
         function getQueryVariable(name) {
             var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
