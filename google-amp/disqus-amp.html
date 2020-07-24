@@ -44,36 +44,12 @@
         };
 
         function postHeight() {
+            post_message.height = document.getElementById('disqus_thread').outerHeight;
             window.parent.postMessage(post_message, '*');
         }
         postHeight();
-
-
-        window.addEventListener('message', receiveMessage, false);
-
-        function receiveMessage(event) {
-            console.log('message received ');
-            console.log(event);
-            if (event.data) {
-                var msg;
-                try {
-                    msg = JSON.parse(event.data);
-                } catch (err) { }
-                if (!msg)
-                    return false;
-                if (msg.name === 'resize' || msg.name === 'rendered') {
-                    if (msg.data.height < 300) {
-                        height = 300;
-                    } else {
-                        height = msg.data.height;
-                    }
-                    post_message.height = height;
-                    console.log('receiveMessage height updated');
-                    console.log(post_message);
-                    postHeight();
-                }
-            }
-        }
+        
+        window.addEventListener("resize", postHeight);
 
         function getQueryVariable(name) {
             var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -93,16 +69,6 @@
             this.page.url = getQueryVariable('url');
             this.page.identifier = getQueryVariable('identifier');
             this.callbacks.onReady.push(function (e) {
-                if (e.height < 300) {
-                    height = 300;
-                } else {
-                    height = e.height;
-                }
-                post_message.height = height;
-                console.log('disqus onReady height updated');
-                console.log(post_message);
-                console.log('disqus onReady event');
-                console.log(e);
                 postHeight();
             });
         };
