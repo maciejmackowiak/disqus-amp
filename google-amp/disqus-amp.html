@@ -45,14 +45,16 @@
 
         function postHeight() {
             var new_height = document.getElementById('disqus_thread').scrollHeight;
+            console.log(new_height);
             if(new_height > 340){
-                post_message.height = document.getElementById('disqus_thread').scrollHeight;  
+                post_message.height = new_height;  
             }
+            console.log(post_message);
             window.parent.postMessage(post_message, '*');
         }
         postHeight();
         
-        window.addEventListener("resize", postHeight());
+        window.addEventListener("resize", postHeight);
 
         function getQueryVariable(name) {
             var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
