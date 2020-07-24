@@ -44,7 +44,10 @@
         };
 
         function postHeight() {
-            post_message.height = document.getElementById('disqus_thread').scrollHeight;
+            var new_height = document.getElementById('disqus_thread').scrollHeight;
+            if(new_height > 340){
+                post_message.height = document.getElementById('disqus_thread').scrollHeight;  
+            }
             window.parent.postMessage(post_message, '*');
         }
         postHeight();
